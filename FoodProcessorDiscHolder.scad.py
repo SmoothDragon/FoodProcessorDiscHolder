@@ -16,4 +16,4 @@ core_w = 14
 base = solid.sphere([outer_d, 3*core_d, core_d])
 
 final = base
-print(solid.scad_render(final))
+print(solid.scad_render(final, file_header="$fn=256;"))
