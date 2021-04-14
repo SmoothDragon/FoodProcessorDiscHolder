@@ -21,5 +21,20 @@ base = solid.sphere(d=1)
 base = solid.scale([3*core_d, outer_d, core_d])(base)
 base = solid.intersection()(base, upper_half_space)
 
+disc_cut = solid.cylinder(d=outer_d, h=outer_w, center=True)
+disc_cut = solid.rotate([0,90,0])(disc_cut)
+disc_cut = solid.translate([0,0,outer_d/2])(disc_cut)
+
+drain_hole = solid.cylinder(d=outer_w, h=outer_d, center=True)
+
+horiz = core_w*1.1
+vert = outer_d*.25
+lift = 2
+
+xy_shift = [(0,-vert),(-horiz,vert),(horiz,vert)]
+for x,y in xy_shift:
+    base -= solid.translate([x,y,lift])(disc_cut)
+    base -= solid.translate([x,y,lift])(drain_hole)
+
 final = base
-print(solid.scad_render(final, file_header="$fn=256;"))
+print(solid.scad_render(final, file_header="$fn=16;"))
