@@ -25,10 +25,10 @@ disc_cut = solid.cylinder(d=outer_d, h=outer_w, center=True)
 disc_cut = solid.rotate([0,90,0])(disc_cut)
 disc_cut = solid.translate([0,0,outer_d/2])(disc_cut)
 
-drain_hole = solid.cylinder(d=outer_w, h=outer_d, center=True)
+drain_hole = solid.cylinder(d=3*outer_w, h=outer_d, center=True)
 
 horiz = core_w*1.1
-vert = outer_d*.25
+vert = outer_d*.125
 lift = 2
 
 xy_shift = [(0,-vert),(-horiz,vert),(horiz,vert)]
@@ -37,4 +37,4 @@ for x,y in xy_shift:
     base -= solid.translate([x,y,lift])(drain_hole)
 
 final = base
-print(solid.scad_render(final, file_header="$fn=16;"))
+print(solid.scad_render(final, file_header="$fn=64;"))
