@@ -13,7 +13,8 @@ outer_w = 2.5
 core_d = 29.5
 core_w = 14
 
-base = solid.sphere([outer_d, 3*core_d, core_d])
+base = solid.sphere(d=1)
+base = solid.scale([3*core_d, outer_d, core_d])(base)
 
 final = base
 print(solid.scad_render(final, file_header="$fn=256;"))
